@@ -5,14 +5,14 @@
             <button :key="index" v-if="ele.label==='Button'" :style="computeStyle(ele.id)"></button>
             <img :key="index" v-if="ele.label==='Img'" :style="computeStyle(ele.id)" />
             <span :key="index" v-if="ele.label==='Text'" :style="computeStyle(ele.id)"></span>
-            <Render :key="index" v-if="ele.children.length" />
+            <!--<Render :key="index" v-if="ele.children.length" />-->
         </template>
         <Render/>
     </div>
 </template>
 
 <script>
-import Render from "@/components/render";
+//import Render from "@/components/render";
 export default {
     name: "Render",
     components: {},
