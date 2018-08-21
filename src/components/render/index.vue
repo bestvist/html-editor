@@ -5,45 +5,25 @@
 </template>
 
 <script>
-    import Node from "@/components/render/Node";
+import Node from "@/components/render/Node";
 
-    export default {
-        name: "Render",
-        components: {
-            Node
-        },
-        props: {
-            data: {
-                type: Array,
-                default: () => {
-                    return [];
-                }
-            },
-            attrs: {
-                type: Array,
-                default: () => {
-                    return [];
-                }
-            }
-        },
-        watch: {
-            data() {
-                console.log(this.data);
-                console.log(this.attrs);
-            }
-        },
-        data() {
-            return {};
-        },
-        methods: {},
-        mounted() {
-
-        }
-    };
+export default {
+    name: "Render",
+    components: {
+        Node
+    },
+    props: ["data", "attrs"],
+    data() {
+        return {
+            attrs1: []
+        };
+    },
+    methods: {}
+};
 </script>
 
 <style lang="scss" scoped>
-    .content-render {
-    }
+.content-render {
+}
 </style>
 

@@ -1,24 +1,21 @@
 <template>
     <div class="b-panel content-tree">
-        <el-tree :data="data" node-key="id" draggable highlight-current :empty-text="''"></el-tree>
+        <el-tree :data="data" node-key="id" draggable highlight-current :empty-text="''" @node-drop="handleDrop"></el-tree>
     </div>
 </template>
 
 <script>
 export default {
     name: "Tree",
-    props: {
-        data: {
-            type: Array,
-            default: () => {
-                return [];
-            }
-        }
-    },
+    props: ['data'],
     data() {
         return {};
     },
-    methods: {},
+    methods: {
+        handleDrop(){
+            
+        }
+    },
     mounted() {}
 };
 </script>

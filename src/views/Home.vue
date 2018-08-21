@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
-    <Menu @choose="handleChooseEle" />
-    <Tree :data="treeList" v-if="treeList.length" />
-    <Render :data="treeList" :attrs="attrList" />
-    <Style />
-  </div>
+    <div class="container">
+        <Menu @choose="handleChooseEle" />
+        <Tree :data="treeList" v-if="treeList.length"/>
+        <Render :data="treeList" :attrs="attrList" />
+        <Style />
+    </div>
 </template>
 
 <script>
@@ -31,7 +31,7 @@ export default {
     methods: {
         handleChooseEle(label, ele) {
             const id = this.id++;
-            this.treeList.push(Object.assign({}, { id: id, label: label }));
+            this.treeList.push(Object.assign({}, { id: id, label: label,children:[] }));
             this.attrList.push(Object.assign({}, { id: id }, ele));
         }
     },
