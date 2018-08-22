@@ -1,10 +1,11 @@
 <template>
     <div class="b-panel content-tree">
-        <el-tree :data="data" node-key="id" draggable highlight-current :empty-text="''" @node-drop="handleDrop"></el-tree>
+        <el-tree :data="data" node-key="id" draggable highlight-current :empty-text="''" @node-click="handleNodeClick" :allow-drop="allowDrop"></el-tree>
     </div>
 </template>
 
 <script>
+const disInnerEle = ['Img','Text'];
 export default {
     name: "Tree",
     props: ['data'],
@@ -12,9 +13,16 @@ export default {
         return {};
     },
     methods: {
-        handleDrop(){
-            
-        }
+        handleNodeClick(data) {
+            this.$emit('select-node',data.id);
+        },
+        allowDrop(draggingNode, dropNode, type) {
+            if (disInnerEle.indexOf(dropNode.data.label) !== -1) {
+                return type !== 'inner';
+            } else {
+                return true;
+            }
+        },
     },
     mounted() {}
 };
@@ -22,7 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 .content-tree {
-    position: absolute;
+    position: fixed;
     top: 60px;
     left: 120px;
 }
@@ -30,6 +38,9 @@ export default {
 /deep/ .el-tree-node__content {
     height: 38px;
     padding: 10px;
+    &:hover{
+        background: #f5f5f5;
+    }
 }
 </style>
 

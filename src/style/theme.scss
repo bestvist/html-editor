@@ -1,7 +1,26 @@
 /* theme style */
 
 .b-panel {
-    padding: 10px;
-    background: #fff;
-    box-shadow: $shadow;
+  padding: $padding;
+  background: #fff;
+  box-shadow: $shadow;
+}
+
+.b-form {
+
+}
+
+.b-form-item {
+  padding: $padding;
+
+  label {
+    display: inline-block;
+    width: 80px;
+    vertical-align: middle;
+  }
+
+  input {
+    border: $border;
+    border-radius: $radius;
+  }
 }

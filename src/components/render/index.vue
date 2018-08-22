@@ -14,9 +14,7 @@ export default {
     },
     props: ["data", "attrs"],
     data() {
-        return {
-            attrs1: []
-        };
+        return {}
     },
     methods: {}
 };
@@ -24,6 +22,9 @@ export default {
 
 <style lang="scss" scoped>
 .content-render {
+    min-height: 1000px;
+    margin: 150px 260px;
+    background: #ffffff;
 }
 </style>
 

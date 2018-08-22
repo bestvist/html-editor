@@ -11,17 +11,18 @@
 <script>
 const element = {
     deleted: false,
-    styles: {},
+    style: {},
     text: ""
 };
 
 const elements = [
     Object.assign({}, element, {
         label: "Box",
-        styles: { width: "100px", height: "100px", background: "#fff" }
+        style: { height: "300px" }
     }),
     Object.assign({}, element, { label: "Button", text: "button" }),
-    Object.assign({}, element, { label: "Img" }),
+    Object.assign({}, element, { label: "Link"}),
+    Object.assign({}, element, { label: "Image" }),
     Object.assign({}, element, { label: "Text", text: "text" })
 ];
 export default {
@@ -42,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 .content-menu {
-    position: absolute;
+    position: fixed;
     top: 60px;
     left: 10px;
     width: 100px;
