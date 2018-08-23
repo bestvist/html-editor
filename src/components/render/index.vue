@@ -1,6 +1,6 @@
 <template>
     <div class="content-render">
-        <Node v-for="node in data" :key="node.id" :node="node" :attrs="attrs"></Node>
+        <Node v-for="node in data" :key="node.id" :node="node" :attrs="attrs" v-if="computeDelete(node.id)"></Node>
     </div>
 </template>
 
@@ -14,9 +14,15 @@ export default {
     },
     props: ["data", "attrs"],
     data() {
-        return {}
+        return {};
     },
-    methods: {}
+    methods: {
+        computeDelete(id) {
+            return this.attrs.some(item => {
+                return item.id === id && !item.delete;
+            });
+        }
+    }
 };
 </script>
 

@@ -1,9 +1,9 @@
 <template>
     <div class="container">
         <Menu @choose="handleChooseEle" />
-        <Tree :data="treeList" v-if="treeList.length" @select-node="handleSelectNode" />
+        <Tree v-if="treeList.length" :data="treeList" :attrs="attrList"  @select-node="handleSelectNode" @delete-node="handleDeleteNode" />
         <Render :data="treeList" :attrs="attrList" />
-        <Style :data="attrObj" @change-style="handleChangeStyle" />
+        <Style v-if="attrObj" :data="attrObj" @change-style="handleChangeStyle" />
     </div>
 </template>
 
@@ -26,32 +26,51 @@ export default {
             id: 0,
             treeList: [],
             attrList: [],
-            attrObj: {}
+            attrObj: null
         };
     },
     methods: {
+        // 选择添加元素
         handleChooseEle(label, ele) {
             const id = this.id++;
-            this.treeList.push(Object.assign({}, { id: id, label: label,children:[] }));
+            this.treeList.push(
+                Object.assign({}, { id: id, label: label, children: [] })
+            );
             this.attrList.push(Object.assign({}, { id: id }, ele));
         },
+        // 选择元素
         handleSelectNode(id) {
-            this.attrList.some((item) => {
-               if(item.id === id){
-                   this.attrObj = item.style;
-               }
-               return item.id === id;
+            this.findEle(this.attrList, id).then(res => {
+                const { data } = res;
+                this.attrObj = data.style;
             });
         },
+        // 删除元素
+        handleDeleteNode(id) {
+            this.findEle(this.attrList, id).then(res => {
+                const { data, index } = res;
+                data.delete = true;
+                this.$set(this.attrList, index, data);
+            }); 
+            event.stopPropagation();
+        },
+        // 更新元素样式属性
         handleChangeStyle(attr) {
-            let attrIndex;
-            this.attrList.some((item, index) => {
-                if(item.id === attr.id) {
-                    attrIndex = index;
-                }
-                return item.id === attr.id;
+            this.findEle(this.attrList, attr.id).then(res => {
+                const { data, index } = res;
+                this.$set(this.attrList, index, data);
             });
-            this.$set(this.attrList, attrIndex, attr);
+        },
+        async findEle(list, id) {
+            let data, index;
+            list.some((item, i) => {
+                if (item.id === id) {
+                    data = item;
+                    index = i;
+                }
+                return item.id === id;
+            });
+            return { data, index };
         }
     },
     mounted() {}
